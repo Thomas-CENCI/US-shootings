@@ -75,11 +75,11 @@ var div = d3.select("body")
     		.style("opacity", 0);
 
 // Load in my states data!
-d3.csv("stateslived.csv", function(data) {
+d3.csv("../data/stateslived.csv", function(data) {
 color.domain([0,1,2,3]); // setting the range of the input data
 
 // Load GeoJSON data and merge with states data
-d3.json("us-states.json", function(json) {
+d3.json("../data/us-states.json", function(json) {
 
 // Loop through each state data value in the .csv file
 for (var i = 0; i < data.length; i++) {
@@ -127,10 +127,14 @@ svg.selectAll("path")
 	}
 });
 
-		 
-// Map the cities I have lived in!
-d3.csv("cities-lived.csv", function(data) {
 
+// Map the cities I have lived in!
+d3.csv("../data/us_shootings.csv", (d) => {
+    data = []
+    d.forEach(element => {
+    console.log(element.total_victims)
+    data.push({"place": element.case, 'lat': element.latitude, 'lon':element.longitude, 'people': element.fatalities});
+    });
 svg.selectAll("circle")
 	.data(data)
 	.enter()
@@ -142,7 +146,7 @@ svg.selectAll("circle")
 		return projection([d.lon, d.lat])[1];
 	})
 	.attr("r", function(d) {
-		return Math.sqrt(d.years) * 4;
+		return Math.sqrt(d.people)*4;
 	})
 		.style("fill", "rgb(217,91,67)")	
 		.style("opacity", 0.85)	
