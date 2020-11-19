@@ -59,7 +59,7 @@ var path = d3.geo.path()               // path generator that will convert GeoJS
 var color = d3.scale.linear()
 			  .range(["rgb(50,190,240)","rgb(50,145,240)","rgb(50,100,240)","rgb(190,47,47)"]);
 
-var legendText = ["Shooting", ">20 shootings", ">10 shootings", "<5 shootings"];
+var legendText = ["Shooting", ">50 shootings", ">20 shootings", "<20 shootings"];
 
 //Create SVG element and append map to the SVG
 var svg = d3.select("body")
@@ -80,7 +80,6 @@ d3.csv("../data/us_shootings.csv", (d) => {
     d.forEach(element => {
     	var state = element.location.split(', ')[1]
     	var fatalities = element.fatalities
-		console.log(element.location);
     	if (!(states.includes(state))) {
     		states.push(state)
     	}
@@ -115,7 +114,6 @@ d3.csv("../data/us_shootings.csv", (d) => {
 		.style("fill", function(d) {
 
 			var name = d.properties.name.toString()
-			// console.log(name)
 
 			if (!(states.includes(name))) {
 				fatalities = NaN
@@ -125,18 +123,13 @@ d3.csv("../data/us_shootings.csv", (d) => {
 
 			}
 
-			// console.log(fatalities)
-
 			if (fatalities >= 50) {
-				console.log("OK top")
 				return color(2);
 			}
 			if (fatalities >= 20) {
-				console.log("OK mid")
 				return color(1);
 			}
 			if (fatalities >= 0) {
-				console.log("OK min")
 				return color(0);
 			}
 			else {
