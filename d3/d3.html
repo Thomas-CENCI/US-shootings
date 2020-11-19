@@ -11,24 +11,23 @@ path:hover {
 }
 
 /* Style for Custom Tooltip */
-div.tooltip {   
- 	position: absolute;           
-	text-align: center;           
-	width: 60px;                  
-	height: 28px;                 
-	padding: 2px;             
-	font: 12px sans-serif;        
-	background: white;   
-	border: 0px;      
-	border-radius: 8px;           
-	pointer-events: none;         
+div.tooltip {
+ 	position: absolute;
+	text-align: center;
+	width: 120px;
+	/* height: 28px; */
+	padding: 2px;
+	font: 12px sans-serif;
+	background: white;
+	border: 0px;
+	border-radius: 8px;
+	pointer-events: none;
 }
-        
 /* Legend Font Style */
 body {
 	font: 11px sans-serif;
 }
-        
+
 /* Legend Position Style */
 .legend {
 	position:absolute;
@@ -41,7 +40,7 @@ body {
 <body>
 <script type="text/javascript">
 
-		
+
 //Width and height of map
 var width = 960;
 var height = 500;
@@ -50,12 +49,12 @@ var height = 500;
 var projection = d3.geo.albersUsa()
 				   .translate([width/2, height/2])    // translate to center of screen
 				   .scale([1000]);          // scale things down so see entire US
-        
+
 // Define path generator
 var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
 		  	 .projection(projection);  // tell path generator to use albersUsa projection
 
-		
+
 // Define linear scale for output
 var color = d3.scale.linear()
 			  .range(["rgb(50,190,240)","rgb(50,145,240)","rgb(50,100,240)","rgb(190,47,47)"]);
@@ -67,11 +66,11 @@ var svg = d3.select("body")
 			.append("svg")
 			.attr("width", width)
 			.attr("height", height);
-        
+
 // Append Div for tooltip to SVG
 var div = d3.select("body")
-		    .append("div")   
-    		.attr("class", "tooltip")               
+		    .append("div")
+    		.attr("class", "tooltip")
     		.style("opacity", 0);
 
 // make a dataset containing the number of fatalities per state
@@ -81,6 +80,7 @@ d3.csv("../data/us_shootings.csv", (d) => {
     d.forEach(element => {
     	var state = element.location.split(', ')[1]
     	var fatalities = element.fatalities
+		console.log(element.location);
     	if (!(states.includes(state))) {
     		states.push(state)
     	}
@@ -96,7 +96,6 @@ d3.csv("../data/us_shootings.csv", (d) => {
 	    })
 	    res.push({"state": state, "fatalities": fatalities})
     })
-    console.log("res", res)
 
     // Load in my states data!
     res.forEach(result => {
@@ -116,7 +115,7 @@ d3.csv("../data/us_shootings.csv", (d) => {
 		.style("fill", function(d) {
 
 			var name = d.properties.name.toString()
-			console.log(name)
+			// console.log(name)
 
 			if (!(states.includes(name))) {
 				fatalities = NaN
@@ -126,10 +125,10 @@ d3.csv("../data/us_shootings.csv", (d) => {
 
 			}
 
-			console.log(fatalities)
+			// console.log(fatalities)
 
 			if (fatalities >= 50) {
-				console.log("OK top")				
+				console.log("OK top")
 				return color(2);
 			}
 			if (fatalities >= 20) {
@@ -165,28 +164,29 @@ d3.csv("../data/us_shootings.csv", (d) => {
 		.attr("r", function(d) {
 			return Math.sqrt(d.people)*4;
 		})
-			.style("fill", "rgb(217,91,67)")	
-			.style("opacity", 0.85)	
+			.style("fill", "rgb(217,91,67)")
+			.style("opacity", 0.85)
 
 	// Modification of custom tooltip code provided by Malcolm Maclean, "D3 Tips and Tricks" 
 	// http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
-	.on("mouseover", function(d) {      
-    	div.transition()        
-      	   .duration(200)      
-           .style("opacity", .9);      
-           div.text(d.place)
-           .style("left", (d3.event.pageX) + "px")     
-           .style("top", (d3.event.pageY - 28) + "px");    
-	})   
+	.on("mouseover", function(d) {
+    	div.transition()
+      	   .duration(200)
+           .style("opacity", .9);
+           div.text('Attaque du ' + d.place + ', \n\n nombre de mort: ' + d.people)
+           .style("left", (d3.event.pageX) + "px")
+           .style("top", (d3.event.pageY - 28) + "px");
 
-    // fade out tooltip on mouse out               
-    .on("mouseout", function(d) {       
-        div.transition()        
-           .duration(500)      
-           .style("opacity", 0);   
+	})
+
+    // fade out tooltip on mouse out
+    .on("mouseout", function(d) {
+        div.transition()
+           .duration(500)
+           .style("opacity", 0);
     });
-});  
-        
+});
+
 // Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
 var legend = d3.select("body").append("svg")
       			.attr("class", "legend")
