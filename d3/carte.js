@@ -1,17 +1,18 @@
+
+
 src="https://d3js.org/d3.v3.min.js";
 type="text/css";
 /* On mouse hover, lighten state color */
 
 
-
 //Width and height of map
-var width = 960;
-var height = 500;
+var width = 600;
+var height = 250;
 
 // D3 Projection
 var projection = d3.geo.albersUsa()
 				   .translate([width/2, height/2])    // translate to center of screen
-				   .scale([1000]);          // scale things down so see entire US
+				   .scale([550]);          // scale things down so see entire US
 
 // Define path generator
 var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
@@ -25,13 +26,13 @@ var color = d3.scale.linear()
 var legendText = ["Shooting", ">50 shootings", ">20 shootings", "<20 shootings"];
 
 //Create SVG element and append map to the SVG
-var svg = d3.select("body")
+var svg = d3.select("#carte")
 			.append("svg")
 			.attr("width", width)
 			.attr("height", height);
 
 // Append Div for tooltip to SVG
-var div = d3.select("body")
+var div = d3.select("#carte")
 		    .append("div")
     		.attr("class", "tooltip")
     		.style("opacity", 0);
@@ -144,27 +145,27 @@ d3.csv("../data/us_shootings.csv", (d) => {
 });
 
 // Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-var legend = d3.select("body").append("svg")
-      			.attr("class", "legend")
-     			.attr("width", 140)
-    			.attr("height", 200)
-   				.selectAll("g")
-   				.data(color.domain().slice().reverse())
-   				.enter()
-   				.append("g")
-     			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+// var legend = d3.select("#carte").append("svg")
+//       			.attr("class", "legend")
+//      			.attr("width", 140)
+//     			.attr("height", 200)
+//    				.selectAll("g")
+//    				.data(color.domain().slice().reverse())
+//    				.enter()
+//    				.append("g")
+//      			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-  	legend.append("rect")
-   		  .attr("width", 18)
-   		  .attr("height", 18)
-   		  .style("fill", color);
+  	// legend.append("rect")
+   	// 	  .attr("width", 18)
+   	// 	  .attr("height", 18)
+   	// 	  .style("fill", color);
 
-  	legend.append("text")
-  		  .data(legendText)
-      	  .attr("x", 24)
-      	  .attr("y", 9)
-      	  .attr("dy", ".35em")
-      	  .text(function(d) { return d; });
+  	// legend.append("text")
+  	// 	  .data(legendText)
+    //   	  .attr("x", 24)
+    //   	  .attr("y", 9)
+    //   	  .attr("dy", ".35em")
+    //   	  .text(function(d) { return d; });
 		});
 
-	});
+    });

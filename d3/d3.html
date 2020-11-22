@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <script src="https://d3js.org/d3.v3.min.js"></script>
-<style type="text/css">
+<link rel="stylesheet" type="text/css" href="dashboard.css">
+<script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
 
+<style type="text/css">
 /* CSS pour la carte */
 /* On mouse hover, lighten state color */
 path:hover {
@@ -34,10 +39,23 @@ body {
 	left:800px;
 	top:350px;
 }
-
 </style>
+
+
+
+
 </head>
 <body>
-<script src="carte.js"></script>
+<main>
+	<div class="chartContainer">
+
+          <div id="carte" class="chart">
+			<text class="chartTitle">Carte des attaques</text>
+          </div>
+	</div>
+	<script src='carte.js'></script>
+
+</main>
+
 </body>
 </html>
