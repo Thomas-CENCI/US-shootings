@@ -7,18 +7,18 @@ d3.csv("../data/us_shootings.csv", (d) => {
     });
     sexe = countOccurences(sexe);
 	// let data = {'m': (sexe.M + sexe.Male), 'f':(sexe.F + sexe.Female)};
-	let data = [{'label': 'Homme', 'value': (sexe.M + sexe.Male)}, {'label': 'Femme', 'value': (sexe.F + sexe.Female)}]
+    let data = [{'label': 'Homme', 'value': (sexe.M + sexe.Male)}, {'label': 'Femme', 'value': (sexe.F + sexe.Female)}]
 	console.log(data)
 	var svg = d3.select("#sexe")
 	.append("svg")
 	.append("g")
 
-svg.append("g")
-	.attr("class", "slices");
-svg.append("g")
-	.attr("class", "labels");
-svg.append("g")
-	.attr("class", "lines");
+    svg.append("g")
+        .attr("class", "slices");
+    svg.append("g")
+        .attr("class", "labels");
+    svg.append("g")
+        .attr("class", "lines");
 
 var width = 600,
     height = 280,
