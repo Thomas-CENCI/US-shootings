@@ -4,13 +4,13 @@ type="text/css";
 
 
 //Width and height of map
-var width = 600;
-var height = 250;
+var width = 1200;
+var height = 350;
 
 // D3 Projection
 var projection = d3.geo.albersUsa()
 				   .translate([width/2, height/2])    // translate to center of screen
-				   .scale([550]);          // scale things down so see entire US
+				   .scale([815]);          // scale things down so see entire US
 
 // Define path generator
 var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
@@ -142,9 +142,9 @@ d3.csv("../data/us_shootings.csv", (d) => {
     });
 });
 
-/**
+
 // Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-var legend = d3.select("#carte").append("svg")
+var legend = d3.select("#leg").append("svg")
       			.attr("class", "legend")
       			.attr("width", 140)
      			.attr("height", 200)
@@ -153,8 +153,8 @@ var legend = d3.select("#carte").append("svg")
    				.enter()
    				.append("g")
      			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; }
-     			//.attr("x", 0)
-				//.attr("y", 0)
+     			// .attr("x", 0)
+				// .attr("y", 0)
 				);
 
 legend.append("rect")
@@ -168,7 +168,7 @@ legend.append("text")
    	  .attr("y", 9)
    	  .attr("dy", ".35em")
    	  .text(function(d) { return d; });
-*/
+
 
 	});
 

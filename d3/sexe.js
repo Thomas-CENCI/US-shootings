@@ -44,7 +44,7 @@ var key = function(d){ return d.data.label; };
 
 var color = d3.scale.ordinal()
 	.domain(["Homme", "Femme"])
-	.range(["#171DEB", "#DB6BD2"]);
+	.range(["#06555C", "#BA7E79"]);
 // data = [{'label': 'Homme', 'value': 100}, {'label': 'Femme', 'value': 100}];
 function randomData (){
 	var labels = color.domain();

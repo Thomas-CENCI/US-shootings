@@ -47,7 +47,7 @@ var key = function(d){ return d.data.label; };
 
 var color = d3.scale.ordinal()
   .domain(["white", "black", "asian", "latino"])
-  .range(["#42E3FF", "#67DE3A", "#F5C64C", "#DE443A"]);
+  .range(["#A0B2A6", "#493843", "#61988E", "#EABDA8"]);
 
 change(data);
 
