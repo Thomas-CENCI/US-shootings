@@ -1,5 +1,3 @@
-
-
 src="https://d3js.org/d3.v3.min.js";
 type="text/css";
 /* On mouse hover, lighten state color */
@@ -21,9 +19,9 @@ var path = d3.geo.path()               // path generator that will convert GeoJS
 
 // Define linear scale for output
 var color = d3.scale.linear()
-			  .range(["rgb(50,190,240)","rgb(50,145,240)","rgb(50,100,240)","rgb(190,47,47)"]);
+			  .range(["rgb(230, 230, 230)", "rgb(160, 160, 160)","rgb(95, 95, 95)","rgb(0, 0, 0)"]);
 
-var legendText = ["Shooting", ">50 shootings", ">20 shootings", "<20 shootings"];
+var legendText = [">50 shootings", ">20 shootings", "<20 shootings", "No shooting"];
 
 //Create SVG element and append map to the SVG
 var svg = d3.select("#carte")
@@ -88,16 +86,16 @@ d3.csv("../data/us_shootings.csv", (d) => {
 			}
 
 			if (fatalities >= 50) {
-				return color(2);
+				return color(3);
 			}
 			if (fatalities >= 20) {
-				return color(1);
+				return color(2);
 			}
 			if (fatalities >= 0) {
-				return color(0);
+				return color(1);
 			}
 			else {
-				return "rgb(213,222,217)";
+				return "rgb(230,230,230)";
 			}
 		});
 	})
@@ -119,7 +117,7 @@ d3.csv("../data/us_shootings.csv", (d) => {
 			return projection([d.lon, d.lat])[1];
 		})
 		.attr("r", function(d) {
-			return Math.sqrt(d.people)*4;
+			return Math.sqrt(d.people)*2;
 		})
 			.style("fill", "rgb(217,91,67)")
 			.style("opacity", 0.85)
@@ -130,7 +128,7 @@ d3.csv("../data/us_shootings.csv", (d) => {
     	div.transition()
       	   .duration(200)
            .style("opacity", .9);
-           div.text('Attaque du ' + d.place + ', \n\n nombre de mort: ' + d.people)
+           div.text(d.place + String.fromCharCode(8) +'Fatalities: ' + d.people)
            .style("left", (d3.event.pageX) + "px")
            .style("top", (d3.event.pageY - 28) + "px");
 
@@ -144,28 +142,34 @@ d3.csv("../data/us_shootings.csv", (d) => {
     });
 });
 
+/**
 // Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-// var legend = d3.select("#carte").append("svg")
-//       			.attr("class", "legend")
-//      			.attr("width", 140)
-//     			.attr("height", 200)
-//    				.selectAll("g")
-//    				.data(color.domain().slice().reverse())
-//    				.enter()
-//    				.append("g")
-//      			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+var legend = d3.select("#carte").append("svg")
+      			.attr("class", "legend")
+      			.attr("width", 140)
+     			.attr("height", 200)
+   				.selectAll("g")
+   				.data(color.domain().slice().reverse())
+   				.enter()
+   				.append("g")
+     			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; }
+     			//.attr("x", 0)
+				//.attr("y", 0)
+				);
 
-  	// legend.append("rect")
-   	// 	  .attr("width", 18)
-   	// 	  .attr("height", 18)
-   	// 	  .style("fill", color);
+legend.append("rect")
+ 	  .attr("width", 18)
+ 	  .attr("height", 18)
+ 	  .style("fill", color);
 
-  	// legend.append("text")
-  	// 	  .data(legendText)
-    //   	  .attr("x", 24)
-    //   	  .attr("y", 9)
-    //   	  .attr("dy", ".35em")
-    //   	  .text(function(d) { return d; });
-		});
+legend.append("text")
+ 	  .data(legendText)
+  	  .attr("x", 24)
+   	  .attr("y", 9)
+   	  .attr("dy", ".35em")
+   	  .text(function(d) { return d; });
+*/
 
-    });
+	});
+
+});
