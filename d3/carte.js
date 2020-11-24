@@ -21,7 +21,7 @@ var path = d3.geo.path()               // path generator that will convert GeoJS
 var color = d3.scale.linear()
 			  .range(["rgb(230, 230, 230)", "rgb(160, 160, 160)","rgb(95, 95, 95)","rgb(0, 0, 0)"]);
 
-var legendText = [">50 shootings", ">20 shootings", "<20 shootings", "No shooting"];
+var legendText = [">50 fatalities", ">20 fatalities", "<20 fatalities", "No fatalities"];
 
 //Create SVG element and append map to the SVG
 var svg = d3.select("#carte")

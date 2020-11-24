@@ -74,6 +74,35 @@ body {
 			fill: none;
 		}
 
+.card {
+	display: inline-block;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 15px;
+	background-color: #252422;
+	color: #ADA661;
+	width: 12em;
+	height: 12em;
+	margin-left: 5em;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.card-body {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.card-body h1 {
+	font: bold 5em sans-serif;
+}
+
+.card-body h3 {
+	font: bold 1.5em sans-serif;
+	text-align: center;
+}
+
 </style>
 
 
@@ -83,22 +112,26 @@ body {
 <body>
 <main>
 	<br/><br/><br/>
+	<h1>Dashboard: US shootings: A killer perpective
 	<div class="chartContainer">
           <div id="carte" class="chart">
-			<text class="chartTitle">Map of attacks</text>
+			<text class="chartTitle">Deconstructed map of US shootings since 1982</text>
 			<div id="leg"></div>
 		  </div>
 		  <br/>
 		  <div id="sexe" class="chart">
-			  <text class="chartTitle">Gender of the aggressor</text>
+			  <text class="chartTitle">Gender of the killer</text>
 		  </div>
 
 		<div id="ethnicGroup" class="chart">
-			<text class="chartTitle">Ethnicity of the aggressor</text>
+			<text class="chartTitle">Ethnicity of the killer</text>
 		</div>
 
 		<div id="cl" class="chart">
-			<text class="chartTitle">The most common words used to describe the health of the killer's</text>
+			<text class="chartTitle">The most used words describing the mental health of the killer</text>
+		</div>
+		<div id="cards" class="chart">
+			<text class="chartTitle">The killer's mental health before committing the crime</text>
 		</div>
 	</div>
 	<script src='carte.js'></script>
@@ -181,6 +214,7 @@ body {
 				d3.layout.cloud().stop();
 			  }});
 			</script>
+	<script src="mentalHealth.js"></script>
 
 </main>
 
