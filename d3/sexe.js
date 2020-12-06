@@ -20,7 +20,7 @@ d3.csv("../data/us_shootings.csv", (d) => {
     svg.append("g")
         .attr("class", "lines");
 
-var width = 600,
+var width = $("#carte").width() - $("#carte").width() * 0.51,
     height = 280,
 	radius = Math.min(width, height) / 2;
 

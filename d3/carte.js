@@ -4,13 +4,17 @@ type="text/css";
 
 
 //Width and height of map
-var width = 1200;
-var height = 350;
+// var width = 1200;
+// var height = 350;
 
+var width = $("#carte").width() + $("#carte").width()*0
+var height = 400 - 25
+console.log(width)
+console.log(height)
 // D3 Projection
 var projection = d3.geo.albersUsa()
 				   .translate([width/2, height/2])    // translate to center of screen
-				   .scale([815]);          // scale things down so see entire US
+				   .scale([700]);          // scale things down so see entire US
 
 // Define path generator
 var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths

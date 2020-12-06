@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="dashboard.css">
+<script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+<script src="./clouds.js"></script>
+<style type="text/css">
+/* CSS pour la carte */
+/* On mouse hover, lighten state color */
+path:hover {
+	fill-opacity: .7;
+}
+/* Style for Custom Tooltip */
+div.tooltip {
+ 	position: absolute;
+	text-align: center;
+	width: 120px;
+	/* height: 28px; */
+	padding: 2px;
+	font: 12px sans-serif;
+	background: white;
+	border: 0px;
+	border-radius: 8px;
+	pointer-events: none;
+}
+/* Legend Font Style */
+body {
+	font: 11px sans-serif;
+}
+
+/* Legend Position Style */
+.legend {
+	position: absolute;;
+	left:1%;
+	top:5%;
+	color:black;
+}
+#carte{
+	width: 60%;
+    height: 400px;
+    
+}
+
+#cl{
+	width: 39%;
+	height: 400px;
+}
+
+#sexe {
+		  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		width: 29.9%;
+		  /*height: 500px; */
+		  /* position: relative; */
+		}
+		svg {
+			width: 100%;
+			height: 100%;
+		}
+
+		path.slice{
+			stroke-width:2px;
+		}
+
+		polyline{
+			opacity: .3;
+			stroke: black;
+			stroke-width: 2px;
+			fill: none;
+		}
+
+.card {
+	display: inline-block;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 15px;
+	background-color: #252422;
+	color: #ADA661;
+	width: 12em;
+	height: 12em;
+	margin-left: 5em;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.card-body {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.card-body h1 {
+	font: bold 5em sans-serif;
+}
+
+.card-body h3 {
+	font: bold 1.5em sans-serif;
+	text-align: center;
+}
+
+#ethnicGroup {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		width: 29.9%;
+		  /*height: 500px; */
+		  /* position: relative; */
+        }
+#mort {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		width: 39%;
+		  /*height: 500px; */
+		  /* position: relative; */
+		}
+</style>
+</head>
+<body>
+        <h1 style="text-align: center;">Dashboard: US shootings: A killer perpective</h1>
+              <div class="col">
+                <div id="carte" class="chart">
+                  <text class="chartTitle">Deconstructed map of US shootings since 1982</text>
+                  <div id="leg"></div>
+                </div>
+                <div id="cl" class="chart">
+                  <text class="chartTitle">The most used words describing the mental health of the killer</text>
+                </div>
+              </div>
+              <div class="col">
+                <br/>
+                <div id="sexe" class="chart">
+                    <text class="chartTitle">Gender of the killer</text>
+                </div>
+
+                <div id="ethnicGroup" class="chart">
+                    <text class="chartTitle">Ethnicity of the killer</text>
+                </div>
+
+                <div id="mort" class="chart">
+                  <text class="chartTitle">Number of death</text>
+                  <p align="center">
+                  <!-- Oui je sais c'est une image mais nous ne savons pas pourquoi ce graph ne veut pas s'afficher -->
+                  <!-- Le code du graphe est dans lineGraphe.html -->
+                    <img
+                      src="../data/Capture.PNG" 
+                      />
+                    </p>
+                </div>
+              </div>
+
+
+
+
+
+
+
+        <!-- <script src="mort.js"></script> -->
+        <script src='carte.js'></script>
+        <script src='sexe.js'></script>
+        <script src="ethnicGroup.js"></script>
+
+        <script>
+            d3.csv("../data/us_shootings.csv", (d) => {
+                    let text_string = '';
+                    d.forEach(element => {
+                        text_string += element.mental_health_details;
+                    });
+                  drawWordCloud(text_string);
+
+                  function drawWordCloud(text_string){
+                    var common = "1969,2016,137,2017,2013,2014,2015,mental,health,“a,poop,i,me,my,myself,we,us,our,ours,ourselves,you,your,yours,yourself,yourselves,he,him,his,himself,she,her,hers,herself,it,its,itself,they,them,their,theirs,themselves,what,which,who,whom,whose,this,that,these,those,am,is,are,was,were,be,been,being,have,has,had,having,do,does,did,doing,will,would,should,can,could,ought,i'm,you're,he's,she's,it's,we're,they're,i've,you've,we've,they've,i'd,you'd,he'd,she'd,we'd,they'd,i'll,you'll,he'll,she'll,we'll,they'll,isn't,aren't,wasn't,weren't,hasn't,haven't,hadn't,doesn't,don't,didn't,won't,wouldn't,shan't,shouldn't,can't,cannot,couldn't,mustn't,let's,that's,who's,what's,here's,there's,when's,where's,why's,how's,a,an,the,and,but,if,or,because,as,until,while,of,at,by,for,with,about,against,between,into,through,during,before,after,above,below,to,from,up,upon,down,in,out,on,off,over,under,again,further,then,once,here,there,when,where,why,how,all,any,both,each,few,more,most,other,some,such,no,nor,not,only,own,same,so,than,too,very,say,says,said,shall";
+
+                    var word_count = {};
+                    var words = text_string.split(/[ '\-\(\)\*":;\[\]|{},.!?]+/);
+                      if (words.length == 1){
+                        word_count[words[0]] = 1;
+                      } else {
+                        words.forEach(function(word){
+                          var word = word.toLowerCase();
+                          if (word != "" && common.indexOf(word)==-1 && word.length>1){
+                            if (word_count[word]){
+                              word_count[word]++;
+                            } else {
+                              word_count[word] = 1;
+                            }
+                          }
+                        })
+                      }
+                    var svg_location = "#cl";
+                    var width = $("#cl").width() -15;
+                    var height = $("#cl").height() -15;
+                    // var width =100;
+                    // var height = 100;
+
+                    var fill = d3.scale.category20();
+                    console.log(word_count);
+                    var word_entries = d3.entries(word_count);
+    
+                    var xScale = d3.scale.linear()
+                       .domain([0, d3.max(word_entries, function(d) {
+                          return d.value;
+                        })
+                       ])
+                       .range([10,100]);
+    
+                    d3.layout.cloud().size([width, height])
+                      .timeInterval(20)
+                      .words(word_entries)
+                      .fontSize(function(d) { return xScale(+d.value); })
+                      .text(function(d) { return d.key; })
+                      .rotate(function() { return ~~(Math.random() * 2) * 90; })
+                      .font("Impact")
+                      .on("end", draw)
+                      .start();
+    
+                    function draw(words) {
+                      d3.select(svg_location).append("svg")
+                          .attr("width", width)
+                          .attr("height", height)
+                        .append("g")
+                          .attr("transform", "translate(" + [width >> 1, height >> 1] + ")")
+                        .selectAll("text")
+                          .data(words)
+                        .enter().append("text")
+                          .style("font-size", function(d) { return xScale(d.value) + "px"; })
+                          .style("font-family", "Impact")
+                          .style("fill", function(d, i) { return fill(i); })
+                          .attr("text-anchor", "middle")
+                          .attr("transform", function(d) {
+                            return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                          })
+                          .text(function(d) { return d.key; });
+                    }
+
+                    d3.layout.cloud().stop();
+                  }});
+                </script>
+
+    <div class="col">
+      <iframe src="https://docs.google.com/spreadsheets/d/1b9o6uDO18sLxBqPwl_Gh9bnhW-ev_dABH83M5Vb5L8o/edit#gid=0" width="100%" height="600" frameborder="0" scrolling="yes"></iframe>
+    </div>
+
+  </body>
+
+    <footer >
+      dataset : <a href="https://www.motherjones.com/politics/2012/12/mass-shootings-mother-jones-full-data/" onclick="window.open(this.href); return false;"> motherjones </a>
+    </footer>
+    </html>
+
