@@ -7,7 +7,7 @@ d3.csv("../data/us_shootings.csv", (d) => {
     });
     sexe = countOccurences(sexe);
 	// let data = {'m': (sexe.M + sexe.Male), 'f':(sexe.F + sexe.Female)};
-    let data = [{'label': 'Homme', 'value': (sexe.M + sexe.Male)}, {'label': 'Femme', 'value': (sexe.F + sexe.Female)}]
+    let data = [{'label': 'Men', 'value': (sexe.M + sexe.Male)}, {'label': 'Women', 'value': (sexe.F + sexe.Female)}]
 	console.log(data)
 	var svg = d3.select("#sexe")
 	.append("svg")
@@ -43,7 +43,7 @@ svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 var key = function(d){ return d.data.label; };
 
 var color = d3.scale.ordinal()
-	.domain(["Homme", "Femme"])
+	.domain(["Men", "Women"])
 	.range(["#06555C", "#BA7E79"]);
 // data = [{'label': 'Homme', 'value': 100}, {'label': 'Femme', 'value': 100}];
 function randomData (){

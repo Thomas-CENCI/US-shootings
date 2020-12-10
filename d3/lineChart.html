@@ -116,7 +116,7 @@
         .attr("x",0 - (height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
-        .text("Nombre de mort");
+        .text("Number of deaths");
 
         console.log(width);
         svg.append("text")
@@ -125,7 +125,7 @@
         .attr("dy", "1em")
         .attr("transform", "translate( " + (width + 12  ) + ", 0 ) rotate(-90)")
         .style("text-anchor", "middle")
-        .text("Nombre de fusillade");
+        .text("Number of fusillades");
 
         svg.append("path")
           .datum(data)
@@ -139,8 +139,8 @@
 
             svg.append("circle").attr("cx",10).attr("cy",30).attr("r", 6).style("fill", "#D99F55")
             svg.append("circle").attr("cx",10).attr("cy",50).attr("r", 6).style("fill", "#594D3E")
-            svg.append("text").attr("x", 30).attr("y", 30).text("Nombre de mort").style("font-size", "15px").attr("alignment-baseline","middle")
-            svg.append("text").attr("x", 30).attr("y", 50).text("Nombre de fusillade").style("font-size", "15px").attr("alignment-baseline","middle")
+            svg.append("text").attr("x", 30).attr("y", 30).text("Number of deaths").style("font-size", "15px").attr("alignment-baseline","middle")
+            svg.append("text").attr("x", 30).attr("y", 50).text("Number of fusilladese").style("font-size", "15px").attr("alignment-baseline","middle")
 
     })
 
