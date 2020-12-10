@@ -107,7 +107,8 @@ d3.csv("../data/us_shootings.csv", (d) => {
 d3.csv("../data/us_shootings.csv", (d) => {
     data = []
     d.forEach(element => {
-	    data.push({"place": element.case, 'lat': element.latitude, 'lon':element.longitude, 'people': element.fatalities});
+		console.log(element);
+	    data.push({"place": element.case, 'lat': element.latitude, 'lon':element.longitude, 'people': element.fatalities, 'date': element.date, 'lieux': element.location2, 'race': element.race, 'health': element.prior_signs_mental_health_issues});
 	});
 
 	svg.selectAll("circle")
@@ -132,7 +133,7 @@ d3.csv("../data/us_shootings.csv", (d) => {
     	div.transition()
       	   .duration(200)
            .style("opacity", .9);
-           div.text(d.place + String.fromCharCode(8) +'Fatalities: ' + d.people)
+           div.html('<h1>'+ d.place + '</h1>' +  '<br/>'  + 'Fatalities: ' + d.people +  '<br/>' + 'date: ' + d.date +  '<br/>' + 'location: ' + d.lieux +  '<br/>' + 'race: ' + d.race +  '<br/>' + 'Mental health: ' + d.health)
            .style("left", (d3.event.pageX) + "px")
            .style("top", (d3.event.pageY - 28) + "px");
 

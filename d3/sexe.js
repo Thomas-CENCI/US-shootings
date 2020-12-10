@@ -20,7 +20,7 @@ d3.csv("../data/us_shootings.csv", (d) => {
     svg.append("g")
         .attr("class", "lines");
 
-var width = $("#carte").width() - $("#carte").width() * 0.51,
+var width = $("#carte").width() - $("#carte").width() * 0.5,
     height = 280,
 	radius = Math.min(width, height) / 2;
 
@@ -89,7 +89,7 @@ function change(data) {
 		.append("text")
 		.attr("dy", ".35em")
 		.text(function(d) {
-			return d.data.label;
+			return d.data.label + " (" + d.data.value + ")";
 		});
 	
 	function midAngle(d){

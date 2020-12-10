@@ -111,8 +111,7 @@ body {
 </head>
 <body>
 <main>
-	<br/><br/><br/>
-	<h1>Dashboard: US shootings: A killer perpective
+	<h1 style="text-align: center;">Dashboard: US shootings: A killer perpective</h1>
 	<div class="chartContainer">
           <div id="carte" class="chart">
 			<text class="chartTitle">Deconstructed map of US shootings since 1982</text>
@@ -130,13 +129,14 @@ body {
 		<div id="cl" class="chart">
 			<text class="chartTitle">The most used words describing the mental health of the killer</text>
 		</div>
-		<div id="cards" class="chart">
-			<text class="chartTitle">The killer's mental health before committing the crime</text>
-		</div>
+
 	</div>
 	<script src='carte.js'></script>
 	<script src='sexe.js'></script>
 	<script src="ethnicGroup.js"></script>
+	<script src="mentalHealth.js"></script>
+
+
 	<script>
 		d3.csv("../data/us_shootings.csv", (d) => {
 				let text_string = '';
@@ -214,7 +214,6 @@ body {
 				d3.layout.cloud().stop();
 			  }});
 			</script>
-	<script src="mentalHealth.js"></script>
 
 </main>
 
